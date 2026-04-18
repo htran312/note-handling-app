@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: api
+  description: >
+    Backend service
+  version: "0.1"
+  x-displayName: Backend service
+
+servers:
+  - url: http://localhost:8000
+
+paths:
+  /users:
+    get:
+      summary: Returns a list of users.
+      operationId: getAllUsers
+      responses:
+        "200":
+          description: list of all users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserDto"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDto"
+  /notes:
+    get:
+      summary: Returns a list of notes.
+      operationId: getAllNotes
+      responses:
+        "200":
+          description: list of all notes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NoteDto"
+    post:
+      summary: Send a note
+      operationId: sendNote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NoteDto"
+      responses:
+        "204":
+          description: Note sent
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDto"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDto"
+components:
+  schemas:
+    UserDto:
+      type: object
+      required:
+        - id
+        - username
+      properties:
+        id:
+          type: string
+          format: uuid
+        username:
+          type: string
+    NoteDto:
+      type: object
+      required:
+        - author
+        - finishedTask
+        - wipTask
+        - blockerTask
+        - handover
+      properties:
+        author:
+          type: string
+          description: "Username of the note author"
+        finishedTask:
+          type: string
+        wipTask:
+          type: string
+          description: "In progress/next tasks"
+        blockerTask:
+          type: string
+          description: "Concerns or potential risks"
+        handover:
+          type: string
+          description: "Username of the receiving person of the note"
+    ErrorResponseDto:
+      type: object
+      required:
+        - type
+        - message
+      properties:
+        type:
+          type: string
+        message:
+          type: string
