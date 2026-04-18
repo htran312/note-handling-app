@@ -15,6 +15,6 @@ docker compose up
 ## What is this
 
 A simple web app with:
-- **API** (Python / FastAPI) on port 8000
+- **API** (Typescript / Express) on port 8000
 - **Web** (React / Vite) on port 3000
 
