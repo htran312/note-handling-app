@@ -16,5 +16,5 @@ RUN npm run build
 # Expose port
 EXPOSE 8000
 
-# Run compiled app
-CMD ["node", "dist/server.js"]
+# Run migrations, then start compiled app
+CMD ["sh", "-c", "npm run migrate:latest && node dist/server.js"]
