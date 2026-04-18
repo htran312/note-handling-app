@@ -4,6 +4,12 @@ An application to submit your oncall handover notes.
 
 ## Running locally
 
+Copy the API env file first:
+
+```bash
+cp ./api/env_example ./api/.env
+```
+
 ```bash
 docker compose up
 ```

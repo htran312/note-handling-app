@@ -12,9 +12,6 @@ RUN npm install
 # Copy source code
 COPY . .
 
-# Create runtime env file from example when building the image
-RUN cp env_example .env
-
 # Build TypeScript
 RUN npm run build
 # Expose port
